@@ -3,3 +3,8 @@ project(danya_decimal)                   # Название проекта
 set(CMAKE_C_STANDARD 11) # Включаем все предупреждения и трактуем их как ошибки
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Werror -Wextra") 
 add_library(danya_decimal STATIC danya_additional.c danya_decimal.c)
+add_executable(run_tests tests.c danya_additional.c danya_decimal.c)
+target_link_libraries(run_tests PRIVATE check m subunit) # Линковка с check, m, subunit
+# Добавляем цель `test` (чтобы можно было запускать через `make test`):
+enable_testing()
+add_test(NAME decimal_test COMMAND run_tests)

@@ -65,6 +65,16 @@ CMAKE_BINARY_DIR = /mnt/c/Users/dkaal/Desktop/Portfolio/Portfolio/decimal/src/bu
 #=============================================================================
 # Targets provided globally by CMake.
 
+# Special rule for the target test
+test:
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Running tests..."
+	/usr/bin/ctest --force-new-ctest-process $(ARGS)
+.PHONY : test
+
+# Special rule for the target test
+test/fast: test
+.PHONY : test/fast
+
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "No interactive CMake dialog available..."
@@ -129,12 +139,26 @@ danya_decimal/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/danya_decimal.dir/build.make CMakeFiles/danya_decimal.dir/build
 .PHONY : danya_decimal/fast
 
+#=============================================================================
+# Target rules for targets named run_tests
+
+# Build rule for target.
+run_tests: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 run_tests
+.PHONY : run_tests
+
+# fast build rule for target.
+run_tests/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/build
+.PHONY : run_tests/fast
+
 danya_additional.o: danya_additional.c.o
 .PHONY : danya_additional.o
 
 # target to build an object file
 danya_additional.c.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/danya_decimal.dir/build.make CMakeFiles/danya_decimal.dir/danya_additional.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/danya_additional.c.o
 .PHONY : danya_additional.c.o
 
 danya_additional.i: danya_additional.c.i
@@ -143,6 +167,7 @@ danya_additional.i: danya_additional.c.i
 # target to preprocess a source file
 danya_additional.c.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/danya_decimal.dir/build.make CMakeFiles/danya_decimal.dir/danya_additional.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/danya_additional.c.i
 .PHONY : danya_additional.c.i
 
 danya_additional.s: danya_additional.c.s
@@ -151,6 +176,7 @@ danya_additional.s: danya_additional.c.s
 # target to generate assembly for a file
 danya_additional.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/danya_decimal.dir/build.make CMakeFiles/danya_decimal.dir/danya_additional.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/danya_additional.c.s
 .PHONY : danya_additional.c.s
 
 danya_decimal.o: danya_decimal.c.o
@@ -159,6 +185,7 @@ danya_decimal.o: danya_decimal.c.o
 # target to build an object file
 danya_decimal.c.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/danya_decimal.dir/build.make CMakeFiles/danya_decimal.dir/danya_decimal.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/danya_decimal.c.o
 .PHONY : danya_decimal.c.o
 
 danya_decimal.i: danya_decimal.c.i
@@ -167,6 +194,7 @@ danya_decimal.i: danya_decimal.c.i
 # target to preprocess a source file
 danya_decimal.c.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/danya_decimal.dir/build.make CMakeFiles/danya_decimal.dir/danya_decimal.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/danya_decimal.c.i
 .PHONY : danya_decimal.c.i
 
 danya_decimal.s: danya_decimal.c.s
@@ -175,7 +203,32 @@ danya_decimal.s: danya_decimal.c.s
 # target to generate assembly for a file
 danya_decimal.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/danya_decimal.dir/build.make CMakeFiles/danya_decimal.dir/danya_decimal.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/danya_decimal.c.s
 .PHONY : danya_decimal.c.s
+
+tests.o: tests.c.o
+.PHONY : tests.o
+
+# target to build an object file
+tests.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/tests.c.o
+.PHONY : tests.c.o
+
+tests.i: tests.c.i
+.PHONY : tests.i
+
+# target to preprocess a source file
+tests.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/tests.c.i
+.PHONY : tests.c.i
+
+tests.s: tests.c.s
+.PHONY : tests.s
+
+# target to generate assembly for a file
+tests.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/tests.c.s
+.PHONY : tests.c.s
 
 # Help Target
 help:
@@ -185,13 +238,18 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... test"
 	@echo "... danya_decimal"
+	@echo "... run_tests"
 	@echo "... danya_additional.o"
 	@echo "... danya_additional.i"
 	@echo "... danya_additional.s"
 	@echo "... danya_decimal.o"
 	@echo "... danya_decimal.i"
 	@echo "... danya_decimal.s"
+	@echo "... tests.o"
+	@echo "... tests.i"
+	@echo "... tests.s"
 .PHONY : help
 
 
