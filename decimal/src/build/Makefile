@@ -152,6 +152,32 @@ run_tests/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/build
 .PHONY : run_tests/fast
 
+#=============================================================================
+# Target rules for targets named run_tests_coverage
+
+# Build rule for target.
+run_tests_coverage: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 run_tests_coverage
+.PHONY : run_tests_coverage
+
+# fast build rule for target.
+run_tests_coverage/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests_coverage.dir/build.make CMakeFiles/run_tests_coverage.dir/build
+.PHONY : run_tests_coverage/fast
+
+#=============================================================================
+# Target rules for targets named gcov_report
+
+# Build rule for target.
+gcov_report: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gcov_report
+.PHONY : gcov_report
+
+# fast build rule for target.
+gcov_report/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gcov_report.dir/build.make CMakeFiles/gcov_report.dir/build
+.PHONY : gcov_report/fast
+
 danya_additional.o: danya_additional.c.o
 .PHONY : danya_additional.o
 
@@ -159,6 +185,7 @@ danya_additional.o: danya_additional.c.o
 danya_additional.c.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/danya_decimal.dir/build.make CMakeFiles/danya_decimal.dir/danya_additional.c.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/danya_additional.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests_coverage.dir/build.make CMakeFiles/run_tests_coverage.dir/danya_additional.c.o
 .PHONY : danya_additional.c.o
 
 danya_additional.i: danya_additional.c.i
@@ -168,6 +195,7 @@ danya_additional.i: danya_additional.c.i
 danya_additional.c.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/danya_decimal.dir/build.make CMakeFiles/danya_decimal.dir/danya_additional.c.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/danya_additional.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests_coverage.dir/build.make CMakeFiles/run_tests_coverage.dir/danya_additional.c.i
 .PHONY : danya_additional.c.i
 
 danya_additional.s: danya_additional.c.s
@@ -177,6 +205,7 @@ danya_additional.s: danya_additional.c.s
 danya_additional.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/danya_decimal.dir/build.make CMakeFiles/danya_decimal.dir/danya_additional.c.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/danya_additional.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests_coverage.dir/build.make CMakeFiles/run_tests_coverage.dir/danya_additional.c.s
 .PHONY : danya_additional.c.s
 
 danya_decimal.o: danya_decimal.c.o
@@ -186,6 +215,7 @@ danya_decimal.o: danya_decimal.c.o
 danya_decimal.c.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/danya_decimal.dir/build.make CMakeFiles/danya_decimal.dir/danya_decimal.c.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/danya_decimal.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests_coverage.dir/build.make CMakeFiles/run_tests_coverage.dir/danya_decimal.c.o
 .PHONY : danya_decimal.c.o
 
 danya_decimal.i: danya_decimal.c.i
@@ -195,6 +225,7 @@ danya_decimal.i: danya_decimal.c.i
 danya_decimal.c.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/danya_decimal.dir/build.make CMakeFiles/danya_decimal.dir/danya_decimal.c.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/danya_decimal.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests_coverage.dir/build.make CMakeFiles/run_tests_coverage.dir/danya_decimal.c.i
 .PHONY : danya_decimal.c.i
 
 danya_decimal.s: danya_decimal.c.s
@@ -204,6 +235,7 @@ danya_decimal.s: danya_decimal.c.s
 danya_decimal.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/danya_decimal.dir/build.make CMakeFiles/danya_decimal.dir/danya_decimal.c.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/danya_decimal.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests_coverage.dir/build.make CMakeFiles/run_tests_coverage.dir/danya_decimal.c.s
 .PHONY : danya_decimal.c.s
 
 tests.o: tests.c.o
@@ -212,6 +244,7 @@ tests.o: tests.c.o
 # target to build an object file
 tests.c.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/tests.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests_coverage.dir/build.make CMakeFiles/run_tests_coverage.dir/tests.c.o
 .PHONY : tests.c.o
 
 tests.i: tests.c.i
@@ -220,6 +253,7 @@ tests.i: tests.c.i
 # target to preprocess a source file
 tests.c.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/tests.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests_coverage.dir/build.make CMakeFiles/run_tests_coverage.dir/tests.c.i
 .PHONY : tests.c.i
 
 tests.s: tests.c.s
@@ -228,6 +262,7 @@ tests.s: tests.c.s
 # target to generate assembly for a file
 tests.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/tests.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests_coverage.dir/build.make CMakeFiles/run_tests_coverage.dir/tests.c.s
 .PHONY : tests.c.s
 
 # Help Target
@@ -239,8 +274,10 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... test"
+	@echo "... gcov_report"
 	@echo "... danya_decimal"
 	@echo "... run_tests"
+	@echo "... run_tests_coverage"
 	@echo "... danya_additional.o"
 	@echo "... danya_additional.i"
 	@echo "... danya_additional.s"

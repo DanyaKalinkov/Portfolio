@@ -65,6 +65,7 @@ CMAKE_BINARY_DIR = /mnt/c/Users/dkaal/Desktop/Portfolio/Portfolio/decimal/src/bu
 # The main recursive "all" target.
 all: CMakeFiles/danya_decimal.dir/all
 all: CMakeFiles/run_tests.dir/all
+all: CMakeFiles/run_tests_coverage.dir/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
@@ -74,6 +75,8 @@ preinstall:
 # The main recursive "clean" target.
 clean: CMakeFiles/danya_decimal.dir/clean
 clean: CMakeFiles/run_tests.dir/clean
+clean: CMakeFiles/run_tests_coverage.dir/clean
+clean: CMakeFiles/gcov_report.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -109,7 +112,7 @@ CMakeFiles/danya_decimal.dir/clean:
 CMakeFiles/run_tests.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/mnt/c/Users/dkaal/Desktop/Portfolio/Portfolio/decimal/src/build/CMakeFiles --progress-num=4,5,6,7 "Built target run_tests"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/mnt/c/Users/dkaal/Desktop/Portfolio/Portfolio/decimal/src/build/CMakeFiles --progress-num=5,6,7,8 "Built target run_tests"
 .PHONY : CMakeFiles/run_tests.dir/all
 
 # Build rule for subdir invocation for target.
@@ -127,6 +130,58 @@ run_tests: CMakeFiles/run_tests.dir/rule
 CMakeFiles/run_tests.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/clean
 .PHONY : CMakeFiles/run_tests.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/run_tests_coverage.dir
+
+# All Build rule for target.
+CMakeFiles/run_tests_coverage.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests_coverage.dir/build.make CMakeFiles/run_tests_coverage.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests_coverage.dir/build.make CMakeFiles/run_tests_coverage.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/mnt/c/Users/dkaal/Desktop/Portfolio/Portfolio/decimal/src/build/CMakeFiles --progress-num=9,10,11,12 "Built target run_tests_coverage"
+.PHONY : CMakeFiles/run_tests_coverage.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/run_tests_coverage.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/dkaal/Desktop/Portfolio/Portfolio/decimal/src/build/CMakeFiles 4
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/run_tests_coverage.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/dkaal/Desktop/Portfolio/Portfolio/decimal/src/build/CMakeFiles 0
+.PHONY : CMakeFiles/run_tests_coverage.dir/rule
+
+# Convenience name for target.
+run_tests_coverage: CMakeFiles/run_tests_coverage.dir/rule
+.PHONY : run_tests_coverage
+
+# clean rule for target.
+CMakeFiles/run_tests_coverage.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests_coverage.dir/build.make CMakeFiles/run_tests_coverage.dir/clean
+.PHONY : CMakeFiles/run_tests_coverage.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/gcov_report.dir
+
+# All Build rule for target.
+CMakeFiles/gcov_report.dir/all: CMakeFiles/run_tests_coverage.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gcov_report.dir/build.make CMakeFiles/gcov_report.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gcov_report.dir/build.make CMakeFiles/gcov_report.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/mnt/c/Users/dkaal/Desktop/Portfolio/Portfolio/decimal/src/build/CMakeFiles --progress-num=4 "Built target gcov_report"
+.PHONY : CMakeFiles/gcov_report.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/gcov_report.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/dkaal/Desktop/Portfolio/Portfolio/decimal/src/build/CMakeFiles 5
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/gcov_report.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/dkaal/Desktop/Portfolio/Portfolio/decimal/src/build/CMakeFiles 0
+.PHONY : CMakeFiles/gcov_report.dir/rule
+
+# Convenience name for target.
+gcov_report: CMakeFiles/gcov_report.dir/rule
+.PHONY : gcov_report
+
+# clean rule for target.
+CMakeFiles/gcov_report.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gcov_report.dir/build.make CMakeFiles/gcov_report.dir/clean
+.PHONY : CMakeFiles/gcov_report.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.
