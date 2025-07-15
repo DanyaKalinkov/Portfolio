@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.10)  # Минимальная версия CMak
 project(danya_decimal)                   # Название проекта
 set(CMAKE_C_STANDARD 11) # Включаем все предупреждения и трактуем их как ошибки
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Werror -Wextra") 
+
+# Собираем библиотеку libdanya_decimal.a:
 add_library(danya_decimal STATIC danya_additional.c danya_decimal.c)
 
 # test:
