@@ -62,7 +62,7 @@ int normalize_big_dec(danya_big_decimal *src);
 void bank_round_big_dec_mantissa(unsigned int num[7], int n);
 unsigned int divide_big_dec_mantissa_by_10(unsigned int num[7]);
 unsigned int divide_dec_mantissa_by_10(unsigned int num[3]);
-int danya_div_by_10(danya_decimal *value); // for danya_floor
+int danya_div_by_10(danya_decimal *value);  // for danya_floor
 unsigned int rem_mantissa_mod10(const unsigned int num[7]);
 void multiply_big_dec_mantissa_by_10(unsigned int dest[7]);
 void multiply_big_dec_mantissa_by_10n(unsigned int num[7], int n);

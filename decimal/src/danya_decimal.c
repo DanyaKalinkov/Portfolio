@@ -93,19 +93,17 @@ int danya_is_not_equal(danya_decimal a, danya_decimal b) {
 }
 
 int danya_sub(danya_decimal value_1, danya_decimal value_2,
-              danya_decimal *result) { // ironscar
+              danya_decimal *result) {  // ironscar
   int complete_flag = 0;
   if (is_zero(&value_1)) {
     *result = value_2;
     complete_flag = 1;
-    if (is_zero(&value_1) && !is_zero(&value_2))
-      set_sign_dec(result, 1);
+    if (is_zero(&value_1) && !is_zero(&value_2)) set_sign_dec(result, 1);
   } else if (is_zero(&value_2)) {
     *result = value_1;
     complete_flag = 1;
   }
-  if (complete_flag == 1)
-    return 0;
+  if (complete_flag == 1) return 0;
   danya_big_decimal value_1_big = {0};
   danya_big_decimal value_2_big = {0};
   danya_big_decimal result_big = {0};
@@ -233,16 +231,14 @@ int danya_div(danya_decimal value_1, danya_decimal value_2,
         value_1.bits[0], value_1.bits[1], value_1.bits[2], 0, 0, 0, 0};
     unsigned int value_2_big_mantissa[7] = {
         value_2.bits[0], value_2.bits[1], value_2.bits[2], 0, 0, 0, 0};
-    for (int i = 0; i < 4; i++)
-      result->bits[i] = 0;
+    for (int i = 0; i < 4; i++) result->bits[i] = 0;
     multiply_big_dec_mantissa_by_10n(value_1_big_mantissa, 38);
     divide_big_dec_mantissa(value_1_big_mantissa, value_2_big_mantissa,
                             quotient, remainder);
     if (check_sign_dec(value_1) != check_sign_dec(value_2))
       set_sign_big_dec(&quotient_big_dec, 1);
     set_scale_big_dec(&quotient_big_dec, 38 + scale_value_1 - scale_value_2);
-    for (int i = 0; i < 7; i++)
-      quotient_big_dec.bits[i] = quotient[i];
+    for (int i = 0; i < 7; i++) quotient_big_dec.bits[i] = quotient[i];
     err_flag = convert_big_dec_to_dec(&quotient_big_dec, result);
   }
   return err_flag;
@@ -250,17 +246,14 @@ int danya_div(danya_decimal value_1, danya_decimal value_2,
 
 int danya_floor(danya_decimal value, danya_decimal *result) {
   int scale_error = check_scale_dec(&value);
-  if (scale_error > 28)
-    return 1;
-  if (!result)
-    return 1;
+  if (scale_error > 28) return 1;
+  if (!result) return 1;
 
   *result = value;
   int scale = check_scale_dec(&value);
   int sign = check_sign_dec(value);
 
-  if (scale == 0)
-    return 0;
+  if (scale == 0) return 0;
   if (is_zero(&value)) {
     set_scale_dec(result, 0);
     return 0;
@@ -299,11 +292,9 @@ int danya_floor(danya_decimal value, danya_decimal *result) {
 
 int danya_round(danya_decimal value, danya_decimal *result) {
   int scale = check_scale_dec(&value);
-  if (scale > 28)
-    return 1;
+  if (scale > 28) return 1;
 
-  if (!result)
-    return 1;
+  if (!result) return 1;
 
   danya_decimal half = {{5, 0, 0, 0}};
   set_scale_dec(&half, 1);
@@ -338,11 +329,9 @@ int danya_round(danya_decimal value, danya_decimal *result) {
 
 int danya_truncate(danya_decimal value, danya_decimal *result) {
   int scale_error = check_scale_dec(&value);
-  if (scale_error > 28)
-    return 1;
+  if (scale_error > 28) return 1;
 
-  if (!result)
-    return 1;
+  if (!result) return 1;
 
   *result = value;
   int scale = check_scale_dec(&value);
@@ -357,11 +346,9 @@ int danya_truncate(danya_decimal value, danya_decimal *result) {
 
 int danya_negate(danya_decimal value, danya_decimal *result) {
   int scale = check_scale_dec(&value);
-  if (scale > 28)
-    return 1;
+  if (scale > 28) return 1;
 
-  if (!result)
-    return 1;
+  if (!result) return 1;
 
   *result = value;
   int sign = check_sign_dec(value);
@@ -480,8 +467,7 @@ int danya_from_decimal_to_float(danya_decimal src, float *dst) {
     int minus = 1;
     long double res = 0, two = 1;
     int exp = get_exp_dec(src);
-    if (check_sign_dec(src) == 1)
-      minus = -1;
+    if (check_sign_dec(src) == 1) minus = -1;
     for (int k = 0; k < 96; k++) {
       if (check_bits_dec(src, k)) {
         res += two;

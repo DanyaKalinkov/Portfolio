@@ -2587,10 +2587,10 @@ END_TEST
 START_TEST(test_danya_div_general) {
   danya_decimal dividend = {
       {0x12, 0x54, 0x48,
-       0}}; // 0x000000480000005400000012 1328165573667864969234
+       0}};  // 0x000000480000005400000012 1328165573667864969234
   danya_decimal divisor = {
       {0x12, 0x31, 0x48,
-       0}}; // 0x000000480000003100000012 1328165573517541113874
+       0}};  // 0x000000480000003100000012 1328165573517541113874
   // 1328165573667864969234 /1328165573517541113874 =
   // 1,0000000001131815628693636436 0x   480000005400000012/480000003100000012 =
   danya_decimal quotient;
@@ -2603,8 +2603,8 @@ START_TEST(test_danya_div_general) {
 END_TEST
 
 START_TEST(test_danya_div_general2) {
-  danya_decimal dividend = {{6, 0, 0, 0}}; //
-  danya_decimal divisor = {{4, 0, 0, 0}};  //
+  danya_decimal dividend = {{6, 0, 0, 0}};  //
+  danya_decimal divisor = {{4, 0, 0, 0}};   //
   danya_decimal quotient;
   int err_code = danya_div(dividend, divisor, &quotient);
   ck_assert_int_eq(err_code, 0);
@@ -2618,8 +2618,8 @@ END_TEST
 START_TEST(test_danya_div_general3) {
   danya_decimal dividend = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x00000000}};
   danya_decimal divisor = {{0x10000000, 0x3E250261, 0x204FCE5E,
-                            0x801C0000}}; // 10000000000000000000000000000 =
-                                          // 0x204FCE5E 3E250261 10000000
+                            0x801C0000}};  // 10000000000000000000000000000 =
+                                           // 0x204FCE5E 3E250261 10000000
   danya_decimal quotient;
   // error code = 0
   int err_code = danya_div(dividend, divisor, &quotient);
@@ -4279,7 +4279,7 @@ START_TEST(danya_from_decimal_to_float_very_big_positive_num) {
   float result_int_num;
   int res = danya_from_decimal_to_float(decimal1, &result_int_num);
   ck_assert_int_eq(res, 0);
-  ck_assert_float_eq(result_int_num, 99992.343750); // 99992.3
+  ck_assert_float_eq(result_int_num, 99992.343750);  // 99992.3
 }
 END_TEST
 
@@ -4291,7 +4291,7 @@ START_TEST(danya_from_decimal_to_float_very_small_positive_num) {
   float result_int_num;
   int res = danya_from_decimal_to_float(decimal1, &result_int_num);
   ck_assert_int_eq(res, 0);
-  ck_assert_float_eq(result_int_num, -99992.343750); // -99992.3
+  ck_assert_float_eq(result_int_num, -99992.343750);  // -99992.3
 
   // danya_from_float_to_decimal
 }
