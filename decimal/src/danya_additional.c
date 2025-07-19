@@ -167,7 +167,8 @@ void normalize_scales(danya_decimal *a, danya_decimal *b) {
   int a_scale = check_scale_dec(a);
   int b_scale = check_scale_dec(b);
 
-  if (a_scale == b_scale) return;
+  if (a_scale == b_scale)
+    return;
 
   if (a_scale < b_scale) {
     multiply_mantissa_by_pow10(a, b_scale - a_scale);
@@ -179,14 +180,20 @@ void normalize_scales(danya_decimal *a, danya_decimal *b) {
 }
 
 int compare_mantissas(danya_decimal a, danya_decimal b) {
-  if (a.bits[2] < b.bits[2]) return -1;
-  if (a.bits[2] > b.bits[2]) return 1;
+  if (a.bits[2] < b.bits[2])
+    return -1;
+  if (a.bits[2] > b.bits[2])
+    return 1;
 
-  if (a.bits[1] < b.bits[1]) return -1;
-  if (a.bits[1] > b.bits[1]) return 1;
+  if (a.bits[1] < b.bits[1])
+    return -1;
+  if (a.bits[1] > b.bits[1])
+    return 1;
 
-  if (a.bits[0] < b.bits[0]) return -1;
-  if (a.bits[0] > b.bits[0]) return 1;
+  if (a.bits[0] < b.bits[0])
+    return -1;
+  if (a.bits[0] > b.bits[0])
+    return 1;
 
   return 0;
 }
@@ -209,7 +216,8 @@ int multiply_mantissa_by_pow10(danya_decimal *num, int power) {
 }
 
 int convert_big_dec_to_dec(const danya_big_decimal *src, danya_decimal *dest) {
-  if (src == NULL || dest == NULL) return danya_ERR_INVALID_ARG;
+  if (src == NULL || dest == NULL)
+    return danya_ERR_INVALID_ARG;
 
   int err_flag = danya_SUCCESS;
   int scale_is_valid = 0;
@@ -247,7 +255,8 @@ int convert_big_dec_to_dec(const danya_big_decimal *src, danya_decimal *dest) {
 }
 
 int normalize_big_dec(danya_big_decimal *src) {
-  if (src == NULL) return danya_ERR_INVALID_ARG;
+  if (src == NULL)
+    return danya_ERR_INVALID_ARG;
 
   int err_flag = danya_SUCCESS;
 
@@ -274,12 +283,14 @@ int normalize_big_dec(danya_big_decimal *src) {
         rem = (unsigned int)(val % 10);
       }
       if (rem == 0) {
-        for (int i = 0; i < 7; i++) mantissa[i] = temp[i];
+        for (int i = 0; i < 7; i++)
+          mantissa[i] = temp[i];
         reductions++;
       }
     }
     if (reductions > 0) {
-      for (int i = 0; i < 7; i++) src->bits[i] = mantissa[i];
+      for (int i = 0; i < 7; i++)
+        src->bits[i] = mantissa[i];
       src->bits[7] = (sign << 31) | ((scale - reductions) << 16);
     }
   }
@@ -340,7 +351,8 @@ unsigned int divide_dec_mantissa_by_10(unsigned int num[3]) {
 }
 
 int danya_div_by_10(danya_decimal *value) {
-  if (value == NULL) return 1;
+  if (value == NULL)
+    return 1;
 
   unsigned long long remainder = 0;
 
@@ -555,7 +567,8 @@ int sum_bitwise_big_dec_mantissa(const unsigned int a[7],
       carry = sum_int >> 1u;
     }
   }
-  for (int i = 0; i < 7; i++) summary[i] = result[i];
+  for (int i = 0; i < 7; i++)
+    summary[i] = result[i];
   return carry;
 }
 
@@ -592,7 +605,8 @@ int sum_bitwise_big_dec(const danya_big_decimal a, const danya_big_decimal b,
   return carry;
 }
 
-void mul_dec_mantissa(danya_decimal a, danya_decimal b, danya_big_decimal *result) {
+void mul_dec_mantissa(danya_decimal a, danya_decimal b,
+                      danya_big_decimal *result) {
   danya_big_decimal a_big = {{0}}, b_big = {{0}};
   convert_dec_to_big_dec(&a, &a_big);
   convert_dec_to_big_dec(&b, &b_big);
@@ -614,4 +628,6 @@ void danya_abs(danya_decimal value, danya_decimal *result) {
   set_sign_dec(result, 0);
 }
 
-int get_exp_dec(danya_decimal value) { return (value.bits[3] & MASK_EXP) >> 16; }
+int get_exp_dec(danya_decimal value) {
+  return (value.bits[3] & MASK_EXP) >> 16;
+}

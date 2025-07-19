@@ -862,7 +862,8 @@ START_TEST(danya_is_greater_or_equal_dec1_less_dec2_comparing_positive_zeros) {
 }
 END_TEST
 
-START_TEST(danya_is_greater_or_equal_dec1_less_dec2_comparing_zeros_minus_plus) {
+START_TEST(
+    danya_is_greater_or_equal_dec1_less_dec2_comparing_zeros_minus_plus) {
   danya_decimal decimal1 = {
       {0b00000000000000000000000000000000, 0b00000000000000000000000000000000,
        0b00000000000000000000000000000000, 0b10000000000000000000000000000000}};
@@ -874,7 +875,8 @@ START_TEST(danya_is_greater_or_equal_dec1_less_dec2_comparing_zeros_minus_plus) 
 }
 END_TEST
 
-START_TEST(danya_is_greater_or_equal_dec1_less_dec2_comparing_zeros_plus_minus) {
+START_TEST(
+    danya_is_greater_or_equal_dec1_less_dec2_comparing_zeros_plus_minus) {
   danya_decimal decimal1 = {
       {0b00000000000000000000000000000000, 0b00000000000000000000000000000000,
        0b00000000000000000000000000000000, 0b00000000000000000000000000000000}};
@@ -2585,10 +2587,10 @@ END_TEST
 START_TEST(test_danya_div_general) {
   danya_decimal dividend = {
       {0x12, 0x54, 0x48,
-       0}};  // 0x000000480000005400000012 1328165573667864969234
+       0}}; // 0x000000480000005400000012 1328165573667864969234
   danya_decimal divisor = {
       {0x12, 0x31, 0x48,
-       0}};  // 0x000000480000003100000012 1328165573517541113874
+       0}}; // 0x000000480000003100000012 1328165573517541113874
   // 1328165573667864969234 /1328165573517541113874 =
   // 1,0000000001131815628693636436 0x   480000005400000012/480000003100000012 =
   danya_decimal quotient;
@@ -2601,8 +2603,8 @@ START_TEST(test_danya_div_general) {
 END_TEST
 
 START_TEST(test_danya_div_general2) {
-  danya_decimal dividend = {{6, 0, 0, 0}};  //
-  danya_decimal divisor = {{4, 0, 0, 0}};   //
+  danya_decimal dividend = {{6, 0, 0, 0}}; //
+  danya_decimal divisor = {{4, 0, 0, 0}};  //
   danya_decimal quotient;
   int err_code = danya_div(dividend, divisor, &quotient);
   ck_assert_int_eq(err_code, 0);
@@ -2616,8 +2618,8 @@ END_TEST
 START_TEST(test_danya_div_general3) {
   danya_decimal dividend = {{0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0x00000000}};
   danya_decimal divisor = {{0x10000000, 0x3E250261, 0x204FCE5E,
-                          0x801C0000}};  // 10000000000000000000000000000 =
-                                         // 0x204FCE5E 3E250261 10000000
+                            0x801C0000}}; // 10000000000000000000000000000 =
+                                          // 0x204FCE5E 3E250261 10000000
   danya_decimal quotient;
   // error code = 0
   int err_code = danya_div(dividend, divisor, &quotient);
@@ -4127,7 +4129,8 @@ START_TEST(danya_from_decimal_to_int_bits_one_not_zero) {
 }
 END_TEST
 
-START_TEST(danya_from_decimal_to_int_bits_one_and_bits_two_not_zero_with_scale1) {
+START_TEST(
+    danya_from_decimal_to_int_bits_one_and_bits_two_not_zero_with_scale1) {
   danya_decimal decimal1 = {
       {0b00000000000000000000000000000110, 0b00010000000000000000000000000000,
        0b00000000000000000000000100000000, 0b00000000000000000000000000000000}};
@@ -4139,7 +4142,8 @@ START_TEST(danya_from_decimal_to_int_bits_one_and_bits_two_not_zero_with_scale1)
 }
 END_TEST
 
-START_TEST(danya_from_decimal_to_int_bits_one_and_bits_two_not_zero_with_scale2) {
+START_TEST(
+    danya_from_decimal_to_int_bits_one_and_bits_two_not_zero_with_scale2) {
   danya_decimal decimal1 = {
       {0b00000000000000000000000000000110, 0b00010000000000000000000000000000,
        0b00000000000000000000000100000000, 0b00000000000000000000000000000000}};
@@ -4275,7 +4279,7 @@ START_TEST(danya_from_decimal_to_float_very_big_positive_num) {
   float result_int_num;
   int res = danya_from_decimal_to_float(decimal1, &result_int_num);
   ck_assert_int_eq(res, 0);
-  ck_assert_float_eq(result_int_num, 99992.343750);  // 99992.3
+  ck_assert_float_eq(result_int_num, 99992.343750); // 99992.3
 }
 END_TEST
 
@@ -4287,7 +4291,7 @@ START_TEST(danya_from_decimal_to_float_very_small_positive_num) {
   float result_int_num;
   int res = danya_from_decimal_to_float(decimal1, &result_int_num);
   ck_assert_int_eq(res, 0);
-  ck_assert_float_eq(result_int_num, -99992.343750);  // -99992.3
+  ck_assert_float_eq(result_int_num, -99992.343750); // -99992.3
 
   // danya_from_float_to_decimal
 }
@@ -4409,8 +4413,10 @@ int main(void) {
   tcase_add_test(tc1_1, danya_is_less_dec1_less_dec2_different_scales4);
   tcase_add_test(tc1_1, danya_is_less_dec1_less_dec2_comparing_negative_zeros);
   tcase_add_test(tc1_1, danya_is_less_dec1_less_dec2_comparing_positive_zeros);
-  tcase_add_test(tc1_1, danya_is_less_dec1_less_dec2_comparing_zeros_minus_plus);
-  tcase_add_test(tc1_1, danya_is_less_dec1_less_dec2_comparing_zeros_plus_minus);
+  tcase_add_test(tc1_1,
+                 danya_is_less_dec1_less_dec2_comparing_zeros_minus_plus);
+  tcase_add_test(tc1_1,
+                 danya_is_less_dec1_less_dec2_comparing_zeros_plus_minus);
   tcase_add_test(tc1_1, danya_is_less_dec1_equal_dec2_very_large_number);
   tcase_add_test(tc1_1, danya_is_less_dec1_less_dec2_very_large_number);
   tcase_add_test(tc1_1, danya_is_less_dec1_greater_dec2_very_small_numbers);
@@ -4425,8 +4431,10 @@ int main(void) {
   tcase_add_test(tc1_1, danya_is_greater_dec1_greater_dec2_different_scales2);
   tcase_add_test(tc1_1, danya_is_greater_dec1_greater_dec2_different_scales3);
   tcase_add_test(tc1_1, danya_is_greater_dec1_less_dec2_different_scales4);
-  tcase_add_test(tc1_1, danya_is_greater_dec1_less_dec2_comparing_negative_zeros);
-  tcase_add_test(tc1_1, danya_is_greater_dec1_less_dec2_comparing_positive_zeros);
+  tcase_add_test(tc1_1,
+                 danya_is_greater_dec1_less_dec2_comparing_negative_zeros);
+  tcase_add_test(tc1_1,
+                 danya_is_greater_dec1_less_dec2_comparing_positive_zeros);
   tcase_add_test(tc1_1,
                  danya_is_greater_dec1_less_dec2_comparing_zeros_minus_plus);
   tcase_add_test(tc1_1,
@@ -4442,22 +4450,26 @@ int main(void) {
   tcase_add_test(tc1_1, danya_is_less_or_equal_dec1_greater_dec2_plus_minus);
   tcase_add_test(tc1_1, danya_is_less_or_equal_dec1_less_dec2_minus_plus);
   tcase_add_test(tc1_1, danya_is_less_or_equal_dec1_less_dec2_min_max);
-  tcase_add_test(tc1_1, danya_is_less_or_equal_dec1_less_dec2_different_scales1);
+  tcase_add_test(tc1_1,
+                 danya_is_less_or_equal_dec1_less_dec2_different_scales1);
   tcase_add_test(tc1_1,
                  danya_is_less_or_equal_dec1_greater_dec2_different_scales2);
   tcase_add_test(tc1_1,
                  danya_is_less_or_equal_dec1_greater_dec2_different_scales3);
-  tcase_add_test(tc1_1, danya_is_less_or_equal_dec1_less_dec2_different_scales4);
   tcase_add_test(tc1_1,
-                 danya_is_less_or_equal_dec1_less_dec2_comparing_negative_zeros);
-  tcase_add_test(tc1_1,
-                 danya_is_less_or_equal_dec1_less_dec2_comparing_positive_zeros);
+                 danya_is_less_or_equal_dec1_less_dec2_different_scales4);
+  tcase_add_test(
+      tc1_1, danya_is_less_or_equal_dec1_less_dec2_comparing_negative_zeros);
+  tcase_add_test(
+      tc1_1, danya_is_less_or_equal_dec1_less_dec2_comparing_positive_zeros);
   tcase_add_test(
       tc1_1, danya_is_less_or_equal_dec1_less_dec2_comparing_zeros_minus_plus);
   tcase_add_test(
       tc1_1, danya_is_less_or_equal_dec1_less_dec2_comparing_zeros_plus_minus);
-  tcase_add_test(tc1_1, danya_is_less_or_equal_dec1_equal_dec2_very_large_number);
-  tcase_add_test(tc1_1, danya_is_less_or_equal_dec1_less_dec2_very_large_number);
+  tcase_add_test(tc1_1,
+                 danya_is_less_or_equal_dec1_equal_dec2_very_large_number);
+  tcase_add_test(tc1_1,
+                 danya_is_less_or_equal_dec1_less_dec2_very_large_number);
   tcase_add_test(tc1_1,
                  danya_is_less_or_equal_dec1_greater_dec2_very_small_numbers);
   tcase_add_test(tc1_1, danya_is_greater_or_equal_dec1_less_dec2);
@@ -4482,15 +4494,17 @@ int main(void) {
   tcase_add_test(
       tc1_1, danya_is_greater_or_equal_dec1_less_dec2_comparing_positive_zeros);
   tcase_add_test(
-      tc1_1, danya_is_greater_or_equal_dec1_less_dec2_comparing_zeros_minus_plus);
+      tc1_1,
+      danya_is_greater_or_equal_dec1_less_dec2_comparing_zeros_minus_plus);
   tcase_add_test(
-      tc1_1, danya_is_greater_or_equal_dec1_less_dec2_comparing_zeros_plus_minus);
+      tc1_1,
+      danya_is_greater_or_equal_dec1_less_dec2_comparing_zeros_plus_minus);
   tcase_add_test(tc1_1,
                  danya_is_greater_or_equal_dec1_equal_dec2_very_large_number);
   tcase_add_test(tc1_1,
                  danya_is_greater_or_equal_dec1_less_dec2_very_large_number);
-  tcase_add_test(tc1_1,
-                 danya_is_greater_or_equal_dec1_greater_dec2_very_small_numbers);
+  tcase_add_test(
+      tc1_1, danya_is_greater_or_equal_dec1_greater_dec2_very_small_numbers);
   tcase_add_test(tc1_1, danya_is_equal_dec1_less_dec2);
   tcase_add_test(tc1_1, danya_is_equal_dec1_greater_dec2);
   tcase_add_test(tc1_1, danya_is_equal_dec1_less_dec2_negative_numbers);
@@ -4504,8 +4518,10 @@ int main(void) {
   tcase_add_test(tc1_1, danya_is_equal_dec1_less_dec2_different_scales4);
   tcase_add_test(tc1_1, danya_is_equal_dec1_less_dec2_comparing_negative_zeros);
   tcase_add_test(tc1_1, danya_is_equal_dec1_less_dec2_comparing_positive_zeros);
-  tcase_add_test(tc1_1, danya_is_equal_dec1_less_dec2_comparing_zeros_minus_plus);
-  tcase_add_test(tc1_1, danya_is_equal_dec1_less_dec2_comparing_zeros_plus_minus);
+  tcase_add_test(tc1_1,
+                 danya_is_equal_dec1_less_dec2_comparing_zeros_minus_plus);
+  tcase_add_test(tc1_1,
+                 danya_is_equal_dec1_less_dec2_comparing_zeros_plus_minus);
   tcase_add_test(tc1_1, danya_is_equal_dec1_equal_dec2_very_large_number);
   tcase_add_test(tc1_1, danya_is_equal_dec1_less_dec2_very_large_number);
   tcase_add_test(tc1_1, danya_is_equal_dec1_greater_dec2_very_small_numbers);
@@ -4530,7 +4546,8 @@ int main(void) {
                  danya_is_not_equal_dec1_less_dec2_comparing_zeros_plus_minus);
   tcase_add_test(tc1_1, danya_is_not_equal_dec1_equal_dec2_very_large_number);
   tcase_add_test(tc1_1, danya_is_not_equal_dec1_less_dec2_very_large_number);
-  tcase_add_test(tc1_1, danya_is_not_equal_dec1_greater_dec2_very_small_numbers);
+  tcase_add_test(tc1_1,
+                 danya_is_not_equal_dec1_greater_dec2_very_small_numbers);
   tcase_add_test(tc1_1, danya_sub1);
   tcase_add_test(tc1_1, danya_sub_negative_num_minus_positive_num);
   tcase_add_test(tc1_1, danya_sub_max_plus_one);
@@ -4563,10 +4580,10 @@ int main(void) {
   tcase_add_test(tc1_1, danya_add_addition_similar_nums);
   tcase_add_test(tc1_1, danya_add_subtraction_similar_negative_nums);
   tcase_add_test(tc1_1, danya_sub_addition_similar_nums_with_similar_scale);
-  tcase_add_test(tc1_1,
-                 danya_add_addition_negative_nums_minus_positive_nums_different);
-  tcase_add_test(tc1_1,
-                 danya_add_addition_positive_nums_minus_negative_nums_different);
+  tcase_add_test(
+      tc1_1, danya_add_addition_negative_nums_minus_positive_nums_different);
+  tcase_add_test(
+      tc1_1, danya_add_addition_positive_nums_minus_negative_nums_different);
   tcase_add_test(tc1_1, danya_add_addition_different_negative_nums);
   tcase_add_test(tc1_1, danya_add_addition_nums_with_different_scale);
   tcase_add_test(tc1_1, danya_add_addition_nums_with_different_scale2);
@@ -4576,8 +4593,8 @@ int main(void) {
   tcase_add_test(tc1_1, danya_add_addition_small_nums_with_similar_scale);
   tcase_add_test(tc1_1, danya_add_addition_nums_wiht_rounding);
   tcase_add_test(tc1_1, danya_add_addition_nums_wiht_rounding1);
-  tcase_add_test(tc1_1,
-                 danya_add_addition_positive_nums_minus_negative_nums_different1);
+  tcase_add_test(
+      tc1_1, danya_add_addition_positive_nums_minus_negative_nums_different1);
   tcase_add_test(tc1_1, mul_zero_both);
   tcase_add_test(tc1_1, mul_overflow);
   tcase_add_test(tc1_1, mul_underflow);
@@ -4623,8 +4640,10 @@ int main(void) {
   tcase_add_test(tc1_1, danya_floor_rounding_negative_num_with_minimal_scale);
   tcase_add_test(tc1_1, danya_floor_rounding_positive_num_with_maximal_scale);
   tcase_add_test(tc1_1, danya_floor_rounding_negative_num_with_maximal_scale);
-  tcase_add_test(tc1_1, danya_floor_rounding_max_positive_num_with_maximal_scale);
-  tcase_add_test(tc1_1, danya_floor_rounding_min_negative_num_with_maximal_scale);
+  tcase_add_test(tc1_1,
+                 danya_floor_rounding_max_positive_num_with_maximal_scale);
+  tcase_add_test(tc1_1,
+                 danya_floor_rounding_min_negative_num_with_maximal_scale);
   tcase_add_test(tc1_1, danya_floor_error_code_one_scale);
   tcase_add_test(tc1_1, danya_floor_error_code_one_NULL);
   tcase_add_test(tc1_1, danya_round_rounding_positive_zero);
@@ -4686,7 +4705,8 @@ int main(void) {
   tcase_add_test(tc1_1, danya_from_decimal_to_int_negative_min_num);
   tcase_add_test(tc1_1, danya_from_decimal_to_int_positive_max_num_plus_one);
   tcase_add_test(tc1_1, danya_from_decimal_to_int_negative_min_num_minus_one);
-  tcase_add_test(tc1_1, danya_from_decimal_to_int_bits_one_and_bits_two_not_zero);
+  tcase_add_test(tc1_1,
+                 danya_from_decimal_to_int_bits_one_and_bits_two_not_zero);
   tcase_add_test(tc1_1, danya_from_decimal_to_int_bits_one_not_zero);
   tcase_add_test(
       tc1_1,
@@ -4694,8 +4714,10 @@ int main(void) {
   tcase_add_test(
       tc1_1,
       danya_from_decimal_to_int_bits_one_and_bits_two_not_zero_with_scale2);
-  tcase_add_test(tc1_1, danya_from_decimal_to_int_bits_one_not_zero_with_scale1);
-  tcase_add_test(tc1_1, danya_from_decimal_to_int_bits_one_not_zero_with_scale2);
+  tcase_add_test(tc1_1,
+                 danya_from_decimal_to_int_bits_one_not_zero_with_scale1);
+  tcase_add_test(tc1_1,
+                 danya_from_decimal_to_int_bits_one_not_zero_with_scale2);
   tcase_add_test(tc1_1, danya_from_decimal_to_float_error_code_one_NULL);
   tcase_add_test(tc1_1, danya_from_decimal_to_float_positive_num);
   tcase_add_test(tc1_1, danya_from_decimal_to_float_negative_num);

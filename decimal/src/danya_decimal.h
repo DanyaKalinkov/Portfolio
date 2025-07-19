@@ -11,10 +11,14 @@ int danya_is_less_or_equal(danya_decimal a, danya_decimal b);
 int danya_is_greater_or_equal(danya_decimal a, danya_decimal b);
 int danya_is_equal(danya_decimal a, danya_decimal b);
 int danya_is_not_equal(danya_decimal a, danya_decimal b);
-int danya_sub(danya_decimal value_1, danya_decimal value_2, danya_decimal *result);
-int danya_add(danya_decimal value_1, danya_decimal value_2, danya_decimal *result);
-int danya_mul(danya_decimal value_1, danya_decimal value_2, danya_decimal *result);
-int danya_div(danya_decimal value_1, danya_decimal value_2, danya_decimal *result);
+int danya_sub(danya_decimal value_1, danya_decimal value_2,
+              danya_decimal *result);
+int danya_add(danya_decimal value_1, danya_decimal value_2,
+              danya_decimal *result);
+int danya_mul(danya_decimal value_1, danya_decimal value_2,
+              danya_decimal *result);
+int danya_div(danya_decimal value_1, danya_decimal value_2,
+              danya_decimal *result);
 int danya_floor(danya_decimal value, danya_decimal *result);
 int danya_round(danya_decimal value, danya_decimal *result);
 int danya_truncate(danya_decimal value, danya_decimal *result);

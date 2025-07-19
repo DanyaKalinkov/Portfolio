@@ -165,19 +165,6 @@ run_tests_coverage/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests_coverage.dir/build.make CMakeFiles/run_tests_coverage.dir/build
 .PHONY : run_tests_coverage/fast
 
-#=============================================================================
-# Target rules for targets named gcov_report
-
-# Build rule for target.
-gcov_report: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gcov_report
-.PHONY : gcov_report
-
-# fast build rule for target.
-gcov_report/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/gcov_report.dir/build.make CMakeFiles/gcov_report.dir/build
-.PHONY : gcov_report/fast
-
 danya_additional.o: danya_additional.c.o
 .PHONY : danya_additional.o
 
@@ -274,7 +261,6 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... test"
-	@echo "... gcov_report"
 	@echo "... danya_decimal"
 	@echo "... run_tests"
 	@echo "... run_tests_coverage"
