@@ -1,0 +1,1 @@
+/usr/bin/c++  -Wall -Werror -Wextra -std=c++17 CMakeFiles/assistantcpp.dir/assistantcpp.cpp.o -o assistantcpp 
