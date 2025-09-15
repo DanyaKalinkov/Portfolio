@@ -1,6 +1,0 @@
-/mnt/c/Users/dkaal/Desktop/Portfolio/Portfolio/decimal/src/build/CMakeFiles/danya_decimal.dir
-/mnt/c/Users/dkaal/Desktop/Portfolio/Portfolio/decimal/src/build/CMakeFiles/run_tests.dir
-/mnt/c/Users/dkaal/Desktop/Portfolio/Portfolio/decimal/src/build/CMakeFiles/run_tests_coverage.dir
-/mnt/c/Users/dkaal/Desktop/Portfolio/Portfolio/decimal/src/build/CMakeFiles/test.dir
-/mnt/c/Users/dkaal/Desktop/Portfolio/Portfolio/decimal/src/build/CMakeFiles/edit_cache.dir
-/mnt/c/Users/dkaal/Desktop/Portfolio/Portfolio/decimal/src/build/CMakeFiles/rebuild_cache.dir

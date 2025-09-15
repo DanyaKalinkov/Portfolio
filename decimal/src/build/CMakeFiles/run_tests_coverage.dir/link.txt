@@ -1,1 +1,0 @@
-/usr/bin/cc  -Wall -Werror -Wextra CMakeFiles/run_tests_coverage.dir/tests.c.o CMakeFiles/run_tests_coverage.dir/danya_additional.c.o CMakeFiles/run_tests_coverage.dir/danya_decimal.c.o -o run_tests_coverage  -lcheck -lm -lsubunit --coverage 

@@ -1,2 +1,0 @@
-/usr/bin/ar qc libdanya_decimal.a CMakeFiles/danya_decimal.dir/danya_additional.c.o CMakeFiles/danya_decimal.dir/danya_decimal.c.o
-/usr/bin/ranlib libdanya_decimal.a
