@@ -1,12 +1,5 @@
 #include "danya_string.h"
 
-/**
- * @brief Преобразует строку в верхний регистр.
- *
- * @param str Входная строка, которую необходимо преобразовать.
- * @return Указатель на новую строку в верхнем регистре или danya_NULL в случае
- * ошибки.
- */
 void *danya_to_upper(const char *str) {
   char *danya_upper_str = danya_NULL;
   if (str != danya_NULL) {
@@ -24,13 +17,6 @@ void *danya_to_upper(const char *str) {
   return danya_upper_str;
 }
 
-/**
- * @brief Преобразует строку в нижний регистр.
- *
- * @param str Входная строка, которую необходимо преобразовать.
- * @return Указатель на новую строку в нижнем регистре или danya_NULL в случае
- * ошибки.
- */
 void *danya_to_lower(const char *str) {
   char *danya_lower_str = danya_NULL;
   if (str != danya_NULL) {
@@ -48,15 +34,6 @@ void *danya_to_lower(const char *str) {
   return danya_lower_str;
 }
 
-/**
- * @brief Вставляет строку `str` в позицию `start_index` строки `src`.
- *
- * @param[in] src Исходная строка.
- * @param[in] str Строка для вставки.
- * @param[in] start_index Индекс, в который будет вставлена строка `str`.
- * @return Указатель на новую строку с вставленной подстрокой или danya_NULL в
- * случае ошибки.
- */
 void *danya_insert(const char *src, const char *str, danya_size_t start_index) {
   if (src == danya_NULL || str == danya_NULL) return danya_NULL;
 
@@ -83,17 +60,6 @@ void *danya_insert(const char *src, const char *str, danya_size_t start_index) {
   return paste;
 }
 
-/**
- * @brief Обрезает строку `src`, удаляя символы из `trim_chars` с начала и
- * конца.
- *
- * Если `trim_chars` не указана или пуста, обрезает пробельные символы по
- * умолчанию.
- *
- * @param[in] src Исходная строка.
- * @param[in] trim_chars Строка символов для обрезки.
- * @return Указатель на новую обрезанную строку или danya_NULL в случае ошибки.
- */
 void *danya_trim(const char *src, const char *trim_chars) {
   char *result = danya_NULL;
   if (src) {

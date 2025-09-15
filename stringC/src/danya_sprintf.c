@@ -1,13 +1,7 @@
 #include "danya_string.h"
 
-/**
- * @brief Форматирует строку согласно заданному формату.
- *
- * @param[out] str Выходная строка.
- * @param[in] format Форматная строка.
- * @param[in] ... Аргументы для форматирования.
- * @return Количество записанных символов.
- */
+#include "danya_string.h"
+
 int danya_sprintf(char *str, const char *format, ...) {
   flags flag_list = {0};
   va_list va;
@@ -55,13 +49,6 @@ int danya_sprintf(char *str, const char *format, ...) {
   return str - str_beginning;
 }
 
-/**
- * @brief Парсит флаги формата.
- *
- * @param[in] format Форматная строка.
- * @param[out] flag_list Структура флагов.
- * @return Указатель на следующий символ после флагов.
- */
 const char *danya_ParseFlags(const char *format, flags *flag_list) {
   while (*format == '-' || *format == '+' || *format == ' ' || *format == '0' ||
          *format == '#') {
@@ -87,14 +74,6 @@ const char *danya_ParseFlags(const char *format, flags *flag_list) {
   return format;
 }
 
-/**
- * @brief Парсит ширину формата.
- *
- * @param[in] format Форматная строка.
- * @param[out] flag_list Структура флагов.
- * @param[in] va Список аргументов.
- * @return Указатель на следующий символ после ширины.
- */
 const char *danya_ParseWidth(const char *format, flags *flag_list, va_list va) {
   if (*format == '*') {
     format++;
@@ -112,14 +91,6 @@ const char *danya_ParseWidth(const char *format, flags *flag_list, va_list va) {
   return format;
 }
 
-/**
- * @brief Парсит точность формата.
- *
- * @param[in] format Форматная строка.
- * @param[out] flag_list Структура флагов.
- * @param[in] va Список аргументов.
- * @return Указатель на следующий символ после точности.
- */
 const char *danya_ParsePrecision(const char *format, flags *flag_list,
                                va_list va) {
   if (*format == '.') {
@@ -145,13 +116,6 @@ const char *danya_ParsePrecision(const char *format, flags *flag_list,
   return format;
 }
 
-/**
- * @brief Парсит длину формата.
- *
- * @param[in] format Форматная строка.
- * @param[out] flag_list Структура флагов.
- * @return Указатель на следующий символ после длины.
- */
 const char *danya_ParseLenght(const char *format, flags *flag_list) {
   switch (*format) {
     case 'h':
@@ -170,13 +134,6 @@ const char *danya_ParseLenght(const char *format, flags *flag_list) {
   return format;
 }
 
-/**
- * @brief Обрабатывает значение согласно флагам и спецификатору.
- *
- * @param[in] flag_list Структура флагов.
- * @param[out] buff Буфер для записи значения.
- * @param[in] va Список аргументов.
- */
 void danya_ProcessValue(flags flag_list, char *buff, va_list va) {
   if (flag_list.specifier == 'd' || flag_list.specifier == 'i')
     danya_IntParser(flag_list, buff, va);
@@ -205,13 +162,6 @@ void danya_ProcessValue(flags flag_list, char *buff, va_list va) {
     danya_to_upper_string(buff);
 }
 
-/**
- * @brief Преобразует целое число в строку.
- *
- * @param[in] flag_list Структура флагов.
- * @param[out] buff Буфер для записи значения.
- * @param[in] va Список аргументов.
- */
 void danya_IntParser(flags flag_list, char *buff, va_list va) {
   int64_t value = va_arg(va, int64_t);
   switch (flag_list.length) {
@@ -227,13 +177,6 @@ void danya_IntParser(flags flag_list, char *buff, va_list va) {
   danya_ApplyFlags(buff, flag_list);
 }
 
-/**
- * @brief Преобразует целое число в строку в заданной системе счисления.
- *
- * @param[in] value Целое число для преобразования.
- * @param[out] return_ar Буфер для записи значения.
- * @param[in] base Основание системы счисления.
- */
 void danya_IntNumberToString(int64_t value, char *return_ar, int base) {
   char tmp[BUFF_SIZE] = {'\0'};
   int index = BUFF_SIZE - 2;
@@ -257,15 +200,6 @@ void danya_IntNumberToString(int64_t value, char *return_ar, int base) {
   }
 }
 
-/**
- * @brief Применяет точность к строке.
- *
- * Если точность больше длины строки, добавляет ведущие нули.
- * Если точность равна 0 и спецификатор целочисленный, удаляет ведущий ноль.
- *
- * @param[in,out] buff Строка для обработки.
- * @param[in] flag_list Структура флагов.
- */
 void danya_ApplyPrecision(char *buff, flags flag_list) {
   char tmp[BUFF_SIZE] = {'\0'};
   int sign = 0;
@@ -298,12 +232,6 @@ void danya_ApplyPrecision(char *buff, flags flag_list) {
     buff[0] = '\0';
 }
 
-/**
- * @brief Проверяет, является ли спецификатор целочисленным.
- *
- * @param[in] c Спецификатор для проверки.
- * @return 1, если спецификатор целочисленный; 0 в противном случае.
- */
 bool danya_IntSpecCheck(char c) {
   char specifs[] = {'d', 'i', 'o', 'u', 'x', 'X'};
   bool result = false;
@@ -317,14 +245,6 @@ bool danya_IntSpecCheck(char c) {
   return result;
 }
 
-/**
- * @brief Применяет флаги к строке.
- *
- * Добавляет знак плюс или пробел, выравнивает строку по ширине.
- *
- * @param[in,out] buff Строка для обработки.
- * @param[in] flag_list Структура флагов.
- */
 void danya_ApplyFlags(char *buff, flags flag_list) {
   char tmp[BUFF_SIZE + 1] = {'\0'};
   if (flag_list.plus && flag_list.specifier != 'u') {
@@ -350,13 +270,6 @@ void danya_ApplyFlags(char *buff, flags flag_list) {
   }
 }
 
-/**
- * @brief Преобразует беззнаковое целое число в строку.
- *
- * @param[in] value Беззнаковое целое число для преобразования.
- * @param[out] return_ar Буфер для записи значения.
- * @param[in] base Основание системы счисления.
- */
 void danya_UnsignNumberToString(uint64_t value, char *return_ar, int base) {
   char buff[BUFF_SIZE + 1] = {'\0'};
   int index = BUFF_SIZE - 1;
@@ -380,15 +293,6 @@ void danya_UnsignNumberToString(uint64_t value, char *return_ar, int base) {
   }
 }
 
-/**
- * @brief Обрабатывает беззнаковое целое число.
- *
- * Преобразует значение в строку и применяет точность и флаги.
- *
- * @param[in] flag_list Структура флагов.
- * @param[out] buff Буфер для записи значения.
- * @param[in] va Список аргументов.
- */
 void danya_UnsignParser(flags flag_list, char *buff, va_list va) {
   uint64_t value = va_arg(va, uint64_t);
   switch (flag_list.length) {
@@ -407,16 +311,6 @@ void danya_UnsignParser(flags flag_list, char *buff, va_list va) {
   danya_ApplyFlags(buff, flag_list);
 }
 
-/**
- * @brief Обрабатывает восьмеричное число.
- *
- * Преобразует значение в строку, добавляет префикс '0' и применяет точность и
- * флаги.
- *
- * @param[in] flag_list Структура флагов.
- * @param[out] buff Буфер для записи значения.
- * @param[in] va Список аргументов.
- */
 void danya_OctalParser(flags flag_list, char *buff, va_list va) {
   buff[0] = '0';
   danya_IntNumberToString(va_arg(va, int64_t), buff + flag_list.hash, 8);
@@ -424,12 +318,6 @@ void danya_OctalParser(flags flag_list, char *buff, va_list va) {
   danya_ApplyFlags(buff, flag_list);
 }
 
-/**
- * @brief Проверяет, состоит ли строка только из нулей.
- *
- * @param[in] buff Строка для проверки.
- * @return 1, если строка состоит только из нулей; 0 в противном случае.
- */
 bool danya_CheckAllZeroes(const char *buff) {
   bool result = true;
   int i = 0;
@@ -440,16 +328,6 @@ bool danya_CheckAllZeroes(const char *buff) {
   return result;
 }
 
-/**
- * @brief Обрабатывает шестнадцатеричное число.
- *
- * Преобразует значение в строку, добавляет префикс '0x' при необходимости и
- * применяет точность и флаги.
- *
- * @param[in] flag_list Структура флагов.
- * @param[out] buff Буфер для записи значения.
- * @param[in] va Список аргументов.
- */
 void danya_HexParser(flags flag_list, char *buff, va_list va) {
   uint64_t value = va_arg(va, uint64_t);
   switch (flag_list.length) {
@@ -469,12 +347,6 @@ void danya_HexParser(flags flag_list, char *buff, va_list va) {
   danya_ApplyFlags(buff, flag_list);
 }
 
-/**
- * @brief Добавляет префикс '0x' к шестнадцатеричному числу.
- *
- * @param[in,out] buff Строка для обработки.
- * @param[in] flag_list Структура флагов.
- */
 void danya_0xPrefAdd(char *buff, flags flag_list) {
   if (!danya_CheckAllZeroes(buff) || flag_list.specifier == 'p') {
     danya_memmove(buff + 2, buff, danya_strlen(buff));
@@ -483,15 +355,6 @@ void danya_0xPrefAdd(char *buff, flags flag_list) {
   }
 }
 
-/**
- * @brief Обрабатывает символ.
- *
- * Преобразует символ в строку и применяет флаги.
- *
- * @param[in] flag_list Структура флагов.
- * @param[out] buff Буфер для записи значения.
- * @param[in] va Список аргументов.
- */
 void danya_CharParser(flags flag_list, char *buff, va_list va) {
   if (flag_list.length == 'l') {
     wchar_t w_c = va_arg(va, wchar_t);
@@ -503,15 +366,6 @@ void danya_CharParser(flags flag_list, char *buff, va_list va) {
   }
 }
 
-/**
- * @brief Форматирует широкий символ.
- *
- * Преобразует широкий символ в строку и выравнивает по ширине.
- *
- * @param[in] flag_list Структура флагов.
- * @param[out] buff Буфер для записи значения.
- * @param[in] w_c Широкий символ для форматирования.
- */
 void danya_FormatWchar(flags flag_list, char *buff, wchar_t w_c) {
   const wchar_t w_str[2] = {w_c, L'\0'};
   char tmp[BUFF_SIZE] = {'\0'};
@@ -527,15 +381,6 @@ void danya_FormatWchar(flags flag_list, char *buff, wchar_t w_c) {
     danya_strcpy(buff, tmp);
 }
 
-/**
- * @brief Форматирует обычный символ.
- *
- * Записывает символ в буфер и выравнивает по ширине.
- *
- * @param[in] flag_list Структура флагов.
- * @param[out] buff Буфер для записи значения.
- * @param[in] c Символ для форматирования.
- */
 void danya_FormatChar(flags flag_list, char *buff, char c) {
   if (!flag_list.minus && flag_list.width) {
     int i = 0;
@@ -555,15 +400,6 @@ void danya_FormatChar(flags flag_list, char *buff, char c) {
     buff[0] = c;
 }
 
-/**
- * @brief Обрабатывает строку.
- *
- * Преобразует строку в буфер и применяет флаги.
- *
- * @param[in] flag_list Структура флагов.
- * @param[out] buff Буфер для записи значения.
- * @param[in] va Список аргументов.
- */
 void danya_StringParser(flags flag_list, char *buff, va_list va) {
   if (flag_list.length == 'l') {
     const wchar_t *wstr = va_arg(va, wchar_t *);
@@ -574,15 +410,6 @@ void danya_StringParser(flags flag_list, char *buff, va_list va) {
   }
 }
 
-/**
- * @brief Форматирует обычную строку.
- *
- * Обрезает строку по точности и выравнивает по ширине.
- *
- * @param[in] flag_list Структура флагов.
- * @param[out] buff Буфер для записи значения.
- * @param[in] str Строка для форматирования.
- */
 void danya_FormatString(flags flag_list, char *buff, const char *str) {
   char tmp[BUFF_SIZE] = {'\0'};
   danya_strcpy(tmp, str);
@@ -599,16 +426,6 @@ void danya_FormatString(flags flag_list, char *buff, const char *str) {
     danya_strcpy(buff, tmp);
 }
 
-/**
- * @brief Форматирует широкую строку.
- *
- * Преобразует широкую строку в обычную, обрезает по точности и выравнивает по
- * ширине.
- *
- * @param[in] flag_list Структура флагов.
- * @param[out] buff Буфер для записи значения.
- * @param[in] wstr Широкая строка для форматирования.
- */
 void danya_FormatWideString(flags flag_list, char *buff, const wchar_t *wstr) {
   char tmp[BUFF_SIZE] = {'\0'};
   char str[BUFF_SIZE] = {'\0'};
@@ -627,15 +444,6 @@ void danya_FormatWideString(flags flag_list, char *buff, const wchar_t *wstr) {
     danya_strcpy(buff, tmp);
 }
 
-/**
- * @brief Обрабатывает указатель.
- *
- * Преобразует указатель в шестнадцатеричное число и добавляет префикс '0x'.
- *
- * @param[in] flag_list Структура флагов.
- * @param[out] buff Буфер для записи значения.
- * @param[in] va Список аргументов.
- */
 void danya_PointerParser(flags flag_list, char *buff, va_list va) {
   danya_UnsignNumberToString(va_arg(va, uint64_t), buff, 16);
   danya_ApplyPrecision(buff, flag_list);
@@ -643,15 +451,6 @@ void danya_PointerParser(flags flag_list, char *buff, va_list va) {
   danya_ApplyFlags(buff, flag_list);
 }
 
-/**
- * @brief Обрабатывает число с плавающей точкой.
- *
- * Преобразует число в строку и применяет флаги.
- *
- * @param[in] flag_list Структура флагов.
- * @param[out] buff Буфер для записи значения.
- * @param[in] va Список аргументов.
- */
 void danya_FloatParser(flags flag_list, char *buff, va_list va) {
   long double value = 0;
   if (flag_list.length == 'L')
@@ -663,13 +462,6 @@ void danya_FloatParser(flags flag_list, char *buff, va_list va) {
   danya_ApplyFlags(buff, flag_list);
 }
 
-/**
- * @brief Преобразует число с плавающей точкой в строку.
- *
- * @param[in] value Число для преобразования.
- * @param[out] return_ar Буфер для записи значения.
- * @param[in] flag_list Структура флагов.
- */
 void danya_DoubleToStringConverter(long double value, char *return_ar,
                                  flags flag_list) {
   char buff[BUFF_SIZE] = {'\0'};
@@ -727,15 +519,6 @@ void danya_DoubleToStringConverter(long double value, char *return_ar,
   }
 }
 
-/**
- * @brief Обрабатывает число в экспоненциальной форме.
- *
- * Преобразует число в строку в экспоненциальной форме и применяет флаги.
- *
- * @param[in] flag_list Структура флагов.
- * @param[out] buff Буфер для записи значения.
- * @param[in] va Список аргументов.
- */
 void danya_MantissParser(flags flag_list, char *buff, va_list va) {
   long double value = 0;
   if (flag_list.length == 'L')
@@ -761,13 +544,6 @@ void danya_MantissParser(flags flag_list, char *buff, va_list va) {
   danya_ApplyFlags(buff, flag_list);
 }
 
-/**
- * @brief Добавляет экспоненциальную часть к строке.
- *
- * @param[in,out] str Строка для обработки.
- * @param[in] power Показатель степени.
- * @param[in] sign Знак показателя степени.
- */
 void danya_AddMantiss(char *str, int power, char sign) {
   int length = danya_strlen(str);
   str[length] = 'e';
@@ -778,16 +554,6 @@ void danya_AddMantiss(char *str, int power, char sign) {
   str[length + 4] = '\0';
 }
 
-/**
- * @brief Обрабатывает число в общей форме.
- *
- * Преобразует число в строку в общей или экспоненциальной форме и применяет
- * флаги.
- *
- * @param[in] flag_list Структура флагов.
- * @param[out] buff Буфер для записи значения.
- * @param[in] va Список аргументов.
- */
 void danya_FloatgGParser(flags flag_list, char *buff, va_list va) {
   long double value = 0;
   if (flag_list.length == 'L')
@@ -817,11 +583,6 @@ void danya_FloatgGParser(flags flag_list, char *buff, va_list va) {
   danya_ApplyFlags(buff, flag_list);
 }
 
-/**
- * @brief Удаляет последние нули после запятой.
- *
- * @param[in,out] buff Строка для обработки.
- */
 void danya_LastZeroesRemover(char *buff) {
   int length = danya_strlen(buff);
   char *dot = danya_strchr(buff, '.');
@@ -839,14 +600,6 @@ void danya_LastZeroesRemover(char *buff) {
   }
 }
 
-/**
- * @brief Применяет точность для общей формы.
- *
- * Обрезает строку до заданной точности, учитывая значимые цифры.
- *
- * @param[in,out] buff Строка для обработки.
- * @param[in] precision Желаемая точность.
- */
 void danya_ApplyGgPrecision(char *buff, int precision) {
   int sig_digs = 0;
   int flag = 0;

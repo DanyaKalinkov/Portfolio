@@ -8,16 +8,6 @@ static int danya_SymbolSearcher(const char *buff, const char *pat);
 static int danya_InfNanSearching(const char *buffer);
 static long double danya_InfNanReturner(const char *buffer);
 
-/**
- * @brief Преобразует строку в число типа long double.
- *
- * Если строка содержит "inf" или "nan", возвращает соответствующее специальное
- * значение. Если строка содержит научную запись, применяет экспоненциальное
- * преобразование.
- *
- * @param[in] buffer Входная строка для преобразования.
- * @return Преобразованное число типа long double.
- */
 long double danya_strtold(const char *buffer) {
   long double result = 0.0;
   int includes_inf_nan = danya_InfNanSearching(buffer);
@@ -30,13 +20,6 @@ long double danya_strtold(const char *buffer) {
   return (includes_inf_nan) ? danya_InfNanReturner(buffer) : result;
 }
 
-/**
- * @brief Ищет в строке `buff` подстроку `pat`, игнорируя регистр.
- *
- * @param[in] buff Исходная строка для поиска.
- * @param[in] pat Подстрока для поиска.
- * @return 1, если подстрока найдена; 0 в противном случае.
- */
 static int danya_SymbolSearcher(const char *buff, const char *pat) {
   int found = 0;
   int length = (int)danya_strlen(pat);
@@ -60,12 +43,6 @@ static int danya_SymbolSearcher(const char *buff, const char *pat) {
   return found;
 }
 
-/**
- * @brief Проверяет, содержит ли строка "inf" или "nan".
- *
- * @param[in] buffer Входная строка для проверки.
- * @return 1, если строка содержит "inf" или "nan"; 0 в противном случае.
- */
 static int danya_InfNanSearching(const char *buffer) {
   bool find_flag = false;
 
@@ -77,12 +54,6 @@ static int danya_InfNanSearching(const char *buffer) {
   return find_flag;
 }
 
-/**
- * @brief Возвращает специальное значение для "inf" или "nan".
- *
- * @param[in] buffer Входная строка.
- * @return INFINITY, если строка содержит "inf"; NAN, если содержит "nan".
- */
 static long double danya_InfNanReturner(const char *buffer) {
   int result = 0;
   int found = 0;
@@ -100,13 +71,6 @@ static long double danya_InfNanReturner(const char *buffer) {
   return (result == 1) ? INFINITY : NAN;
 }
 
-/**
- * @brief Применяет экспоненциальное преобразование для научной записи.
- *
- * @param[in] result Исходное число.
- * @param[in] buffer Входная строка с научной записью.
- * @return Число после применения экспоненциального преобразования.
- */
 static long double danya_ScienceNotattionApplyer(long double result,
                                                const char *buffer) {
   char sign = '+';
@@ -131,12 +95,6 @@ static long double danya_ScienceNotattionApplyer(long double result,
   return result;
 }
 
-/**
- * @brief Проверяет, содержит ли строка научную запись.
- *
- * @param[in] buffer Входная строка для проверки.
- * @return 1, если строка содержит научную запись; 0 в противном случае.
- */
 static int danya_ScienceNotationFinder(const char *buffer) {
   int result = 0;
   char *ptr = (char *)buffer;
@@ -147,12 +105,6 @@ static int danya_ScienceNotationFinder(const char *buffer) {
   return result;
 }
 
-/**
- * @brief Преобразует строку в число типа long double без учета научной записи.
- *
- * @param[in] buffer Входная строка для преобразования.
- * @return Преобразованное число типа long double.
- */
 static long double danya_atof(const char *buffer) {
   long double fractional_part = 0.0;
   char *ptr = (char *)buffer;

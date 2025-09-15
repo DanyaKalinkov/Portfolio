@@ -1,13 +1,5 @@
 #include "danya_string.h"
 
-/**
- * @brief Читает данные из строки согласно формату.
- *
- * @param[in] str Входная строка для чтения.
- * @param[in] fstr Форматная строка.
- * @param[in] ... Аргументы для чтения.
- * @return Количество успешно прочитанных аргументов или код ошибки.
- */
 int danya_sscanf(const char *str, const char *fstr, ...) {
   int eof_fl = danya_CheckStringEOF(str);
   int result = 0;
@@ -29,33 +21,12 @@ int danya_sscanf(const char *str, const char *fstr, ...) {
   return eof_fl ? eof_fl : result;
 }
 
-/**
- * @brief Проверяет, является ли символ пробельным.
- *
- * @param[in] c Символ для проверки.
- * @return 1, если символ является пробельным; 0 в противном случае.
- */
 int danya_isspace(char c) { return (c == ' ' || c == '\n' || c == '\t'); }
 
-/**
- * @brief Проверяет, является ли символ буквой.
- *
- * @param[in] c Символ для проверки.
- * @return 1, если символ является буквой; 0 в противном случае.
- */
 int danya_isalpha(char c) {
   return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z');
 }
 
-/**
- * @brief Проверяет, достигнут ли конец строки.
- *
- * Возвращает 0, если строка не пуста и содержит непробельные символы; -1 в
- * противном случае.
- *
- * @param[in] src Входная строка для проверки.
- * @return Код состояния строки.
- */
 int danya_CheckStringEOF(const char *src) {
   int result = -1;
   int flag = 0;
@@ -70,13 +41,6 @@ int danya_CheckStringEOF(const char *src) {
   return result;
 }
 
-/**
- * @brief Парсит токены из форматной строки.
- *
- * @param[in,out] fstr Указатель на форматную строку.
- * @param[in] va Список аргументов.
- * @return Структура токена.
- */
 token danya_ParseTokensFSTR(char **fstr, va_list *va) {
   token tokens_ar = {.addr = danya_NULL,
                      .lenght_t = NONE_LENGHT,
@@ -114,13 +78,6 @@ token danya_ParseTokensFSTR(char **fstr, va_list *va) {
   return tokens_ar;
 }
 
-/**
- * @brief Пропускает символы из буфера `tokens_ar->buff` в строке `src`.
- *
- * @param[in,out] src Указатель на строку для обработки.
- * @param[out] fail Флаг ошибки.
- * @param[in] tokens_ar Структура токена.
- */
 void danya_SkipChars(char **src, int *fail, const token *tokens_ar) {
   int check_len = danya_strspn(*src, tokens_ar->buff);
   int length = danya_strlen(tokens_ar->buff);
@@ -132,12 +89,6 @@ void danya_SkipChars(char **src, int *fail, const token *tokens_ar) {
     (*src) = (*src) + length;
 }
 
-/**
- * @brief Парсит ширину формата из форматной строки.
- *
- * @param[in,out] fstr Указатель на форматную строку.
- * @param[out] tokens_ar Структура токена.
- */
 void danya_ParseWidthFSTR(char **fstr, token *tokens_ar) {
   if (**fstr == '*') {
     (*fstr)++;
@@ -151,12 +102,6 @@ void danya_ParseWidthFSTR(char **fstr, token *tokens_ar) {
   }
 }
 
-/**
- * @brief Парсит число из форматной строки.
- *
- * @param[in,out] fstr Указатель на форматную строку.
- * @return Парсенное число.
- */
 int danya_ParseNumberFSTR(char **fstr) {
   char tmp[BUFF_SIZE] = {'\0'};
   int result = 0, i = 0;
@@ -169,12 +114,6 @@ int danya_ParseNumberFSTR(char **fstr) {
   return result;
 }
 
-/**
- * @brief Парсит длину формата из форматной строки.
- *
- * @param[in,out] fstr Указатель на форматную строку.
- * @param[out] tokens_ar Структура токена.
- */
 void danya_ParseLenghtFSTR(char **fstr, token *tokens_ar) {
   switch (**fstr) {
     case 'h':
@@ -196,28 +135,11 @@ void danya_ParseLenghtFSTR(char **fstr, token *tokens_ar) {
   }
 }
 
-/**
- * @brief Парсит спецификатор формата из форматной строки.
- *
- * @param[in,out] fstr Указатель на форматную строку.
- * @param[out] tokens_ar Структура токена.
- */
 void danya_ParseSpecFSTR(char **fstr, token *tokens_ar) {
   tokens_ar->spec = (**fstr);
   (*fstr)++;
 }
 
-/**
- * @brief Записывает данные в память согласно токенам.
- *
- * Обрабатывает различные спецификаторы формата и записывает данные в
- * соответствующие области памяти.
- *
- * @param[in,out] src Указатель на строку для обработки.
- * @param[in] tokens Массив токенов.
- * @param[in] tok_len Количество токенов.
- * @param[out] result Количество успешно прочитанных аргументов.
- */
 void danya_WriteTokensToMem(char **src, token *tokens, int tok_len, int *result) {
   const char *start = *src;
   int i = 0, fail = 0;
@@ -241,23 +163,10 @@ void danya_WriteTokensToMem(char **src, token *tokens, int tok_len, int *result)
   }
 }
 
-/**
- * @brief Пропускает пробельные символы в строке.
- *
- * @param[in,out] src Указатель на строку для обработки.
- */
 void danya_SkipSpaces(char **src) {
   while (**src && danya_isspace(**src)) (*src)++;
 }
 
-/**
- * @brief Записывает символ в память.
- *
- * @param[in,out] str Указатель на строку для обработки.
- * @param[out] result Количество успешно прочитанных аргументов.
- * @param[in] tokens_ar Структура токена.
- * @param[out] fail Флаг ошибки.
- */
 void danya_WriteCharToMem(char **str, int *result, token *tokens_ar, int *fail) {
   *fail = 1;
   int stop_flag = 0;
@@ -275,14 +184,6 @@ void danya_WriteCharToMem(char **str, int *result, token *tokens_ar, int *fail) 
   }
 }
 
-/**
- * @brief Записывает целое число в память.
- *
- * @param[in,out] str Указатель на строку для обработки.
- * @param[out] fail_flag Флаг ошибки.
- * @param[out] result Количество успешно прочитанных аргументов.
- * @param[in] tokens_ar Структура токена.
- */
 void danya_WriteIntToMem(char **str, int *fail_flag, int *result,
                        token *tokens_ar) {
   long long int result_int = 0;
@@ -312,16 +213,6 @@ void danya_WriteIntToMem(char **str, int *fail_flag, int *result,
     danya_WriteCharToBuff(str, "0123456789", danya_NULL, 0, 0);
 }
 
-/**
- * @brief Записывает неопределенное целое число в память.
- *
- * Обрабатывает как десятичные, так и шестнадцатеричные числа.
- *
- * @param[in,out] str Указатель на строку для обработки.
- * @param[out] fail_flag Флаг ошибки.
- * @param[out] result Количество успешно прочитанных аргументов.
- * @param[in] tokens_ar Структура токена.
- */
 void danya_WriteUnspecIntToMem(char **str, int *fail_flag, int *result,
                              token *tokens_ar) {
   *fail_flag = 1;
@@ -338,15 +229,6 @@ void danya_WriteUnspecIntToMem(char **str, int *fail_flag, int *result,
   }
 }
 
-/**
- * @brief Записывает символы в буфер.
- *
- * @param[in,out] str Указатель на строку для обработки.
- * @param[in] chars Строка допустимых символов.
- * @param[out] buff Буфер для записи.
- * @param[in] width Максимальная ширина для записи.
- * @param[in] start_ind Начальный индекс в буфере.
- */
 void danya_WriteCharToBuff(char **str, const char *chars, char *buff,
                          int16_t width, int start_ind) {
   int stop_flag = 0;
@@ -361,13 +243,6 @@ void danya_WriteCharToBuff(char **str, const char *chars, char *buff,
   }
 }
 
-/**
- * @brief Записывает число с плавающей точкой в память.
- *
- * @param[in,out] str Указатель на строку для обработки.
- * @param[out] result Количество успешно прочитанных аргументов.
- * @param[in] tokens_ar Структура токена.
- */
 void danya_WriteFloatToMem(char **str, int *result, token *tokens_ar) {
   int check_legit = 0;
   if (tokens_ar->spec == 'f')
@@ -406,14 +281,6 @@ void danya_WriteFloatToMem(char **str, int *result, token *tokens_ar) {
   }
 }
 
-/**
- * @brief Записывает строку в память.
- *
- * @param[in,out] str Указатель на строку для обработки.
- * @param[in] fail_flag Флаг ошибки.
- * @param[out] result Количество успешно прочитанных аргументов.
- * @param[in] tokens_ar Структура токена.
- */
 void danya_WriteStrToMem(char **str, const int *fail_flag, int *result,
                        token *tokens_ar) {
   int success_read = 0;
@@ -444,14 +311,6 @@ void danya_WriteStrToMem(char **str, const int *fail_flag, int *result,
   }
 }
 
-/**
- * @brief Записывает беззнаковое целое число в память.
- *
- * @param[in,out] str Указатель на строку для обработки.
- * @param[out] fail_flag Флаг ошибки.
- * @param[out] result Количество успешно прочитанных аргументов.
- * @param[in] tokens_ar Структура токена.
- */
 void danya_WriteUnsignIntToMem(char **str, int *fail_flag, int *result,
                              token *tokens_ar) {
   *fail_flag = 1;
@@ -475,15 +334,6 @@ void danya_WriteUnsignIntToMem(char **str, int *fail_flag, int *result,
     danya_WriteCharToBuff(str, "0123456789", danya_NULL, 0, 0);
 }
 
-/**
- * @brief Записывает шестнадцатеричное или восьмеричное число в память.
- *
- * @param[in,out] str Указатель на строку для обработки.
- * @param[out] fail_flag Флаг ошибки.
- * @param[out] result Количество успешно прочитанных аргументов.
- * @param[in] tokens_ar Структура токена.
- * @param[in] base Основание системы счисления (8 или 16).
- */
 void danya_WriteHexOctToMem(char **str, int *fail_flag, int *result,
                           token *tokens_ar, int base) {
   int sign = 1;
@@ -520,13 +370,6 @@ void danya_WriteHexOctToMem(char **str, int *fail_flag, int *result,
         read_symbols < tokens_ar->width_n ? read_symbols : tokens_ar->width_n;
 }
 
-/**
- * @brief Преобразует беззнаковое целое число в соответствующий тип.
- *
- * @param[in] tokens_ar Структура токена.
- * @param[in] result Значение для преобразования.
- * @param[in] sign Знак числа (1 для положительного, -1 для отрицательного).
- */
 void danya_UnsignConverter(token *tokens_ar, unsigned long long int result,
                          int sign) {
   if (tokens_ar->lenght_t == NONE_LENGHT) {
@@ -541,13 +384,6 @@ void danya_UnsignConverter(token *tokens_ar, unsigned long long int result,
   }
 }
 
-/**
- * @brief Преобразует знаковое целое число в соответствующий тип.
- *
- * @param[in] tokens_ar Структура токена.
- * @param[in] result Значение для преобразования.
- * @param[in] sign Знак числа (1 для положительного, -1 для отрицательного).
- */
 void danya_IntConverter(token *tokens_ar, long long int result, int sign) {
   if (tokens_ar->spec != 'p') {
     if (tokens_ar->lenght_t == NONE_LENGHT) {
@@ -562,12 +398,6 @@ void danya_IntConverter(token *tokens_ar, long long int result, int sign) {
   }
 }
 
-/**
- * @brief Преобразует число с плавающей точкой в соответствующий тип.
- *
- * @param[in] tokens_ar Структура токена.
- * @param[in] result Значение для преобразования.
- */
 void danya_FloatConverter(token *tokens_ar, long double result) {
   if (tokens_ar->lenght_t == NONE_LENGHT)
     *(float *)tokens_ar->addr = (float)result;
