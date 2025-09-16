@@ -25,7 +25,7 @@ test:
 	gcc $(MAIN_FLAGS) $(C_FILES) $(TESTS_FLAGS) -o $(TESTS_DIR)/run_tests
 
 
-gcov_report: test
+gcov_report:
 	gcc $(MAIN_FLAGS) $(C_FILES) $(GCOV_REPORT_FLAGS) -o $(GCOV_REPORT_DIR)/run_tests_gcov
 	$(GCOV_REPORT_DIR)/./run_tests_gcov
 	rm -f $(GCOV_REPORT_DIR)/run_tests_gcov-tests.gcda $(GCOV_REPORT_DIR)/run_tests_gcov-tests.gcno
