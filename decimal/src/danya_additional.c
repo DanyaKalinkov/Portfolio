@@ -1,5 +1,27 @@
 #include "danya_additional.h"
 
+// void printf_decimal(danya_decimal decimal) {
+//   for (int i = 0; i < 4; i++) {
+//     printf("bits[%d]: ", i);
+//     for (int j = 31; j >= 0; j--) {
+//       printf("%d", (decimal.bits[i] >> j) & 1);
+//     }
+//     printf(" dec: %d, hex: %x\n", decimal.bits[i], decimal.bits[i]);
+//   }
+//   printf("\n");
+// }
+
+// void printf_big_decimal(danya_big_decimal bigdec) {
+//   for (int i = 0; i < 8; i++) {
+//     printf("bits[%d]: ", i);
+//     for (int j = 31; j >= 0; j--) {
+//       printf("%d", (bigdec.bits[i] >> j) & 1);
+//     }
+//     printf(" dec: %d, hex: %x\n", bigdec.bits[i], bigdec.bits[i]);
+//   }
+//   printf("\n");
+// }
+
 void convert_dec_to_big_dec(danya_decimal *decimal, danya_big_decimal *bigdec) {
   for (int i = 0; i < 3; i++) {
     bigdec->bits[i] = decimal->bits[i];

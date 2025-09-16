@@ -13,7 +13,7 @@ all: danya_decimal.a
 danya_decimal.a:
 	gcc $(MAIN_FLAGS) -c danya_additional.c -o $(OBJ_DIR)/danya_additional.o
 	gcc $(MAIN_FLAGS) -c danya_decimal.c -o $(OBJ_DIR)/danya_decimal.o
-	ar r $(LIB_DIR)/danya_additional.a $(OBJ_DIR)/*.o
+	ar r $(LIB_DIR)/danya_decimal.a $(OBJ_DIR)/*.o
 
 
 test:

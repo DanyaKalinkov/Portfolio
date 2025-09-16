@@ -31,6 +31,8 @@ typedef struct {
   unsigned int bits[8];
 } danya_big_decimal;
 
+// void printf_decimal(danya_decimal decimal);
+// void printf_big_decimal(danya_big_decimal bigdec);
 void convert_dec_to_big_dec(danya_decimal *decimal, danya_big_decimal *bigdec);
 int check_bits_int(const unsigned int *src, int indx);
 int check_bits_dec(const danya_decimal decimal, int indx);
