@@ -37,4 +37,5 @@ clean:
 	rm -f $(GCOV_REPORT_DIR)/run_tests_gcov
 	rm -f $(TESTS_DIR)/run_tests
 
+
 .PHONY: gcov_report

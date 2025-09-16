@@ -1,0 +1,43 @@
+cmake_minimum_required(VERSION 3.10)  # Минимальная версия CMake
+project(danya_decimal)                   # Название проекта
+set(CMAKE_C_STANDARD 11) # Включаем все предупреждения и трактуем их как ошибки
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Werror -Wextra") 
+
+# Собираем библиотеку libdanya_decimal.a:
+add_library(danya_decimal STATIC danya_additional.c danya_decimal.c)
+
+# test:
+add_executable(run_tests tests.c danya_additional.c danya_decimal.c)
+target_link_libraries(run_tests PRIVATE check m subunit) # Линковка с check, m, subunit
+enable_testing()
+add_test(NAME decimal_test COMMAND run_tests) # Добавляем цель `test` (чтобы можно было запускать через `make test`)
+
+# gcov_report:
+add_executable(run_tests_coverage tests.c danya_additional.c danya_decimal.c)
+target_link_libraries(run_tests_coverage PRIVATE check m subunit)
+target_compile_options(run_tests_coverage PRIVATE --coverage -fprofile-arcs -ftest-coverage)
+target_link_libraries(run_tests_coverage PRIVATE --coverage)
+
+# Добавляем цель gcov_report:
+find_program(GCOVR_PATH gcovr REQUIRED)
+add_custom_target(gcov_report
+    COMMAND ./run_tests_coverage  # Сначала запускаем тесты
+    COMMAND ${GCOVR_PATH} 
+        -r ${CMAKE_SOURCE_DIR}  # Корень проекта (где исходники)
+        --object-directory=${CMAKE_BINARY_DIR}/CMakeFiles/run_tests_coverage.dir  # Где лежат .gcda
+        --exclude tests.c 
+        --html 
+        --html-details 
+        -o ${CMAKE_BINARY_DIR}/coverage_report.html
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+    DEPENDS run_tests_coverage
+    COMMENT "Generating coverage report..."
+)
+
+# Запуск тестов перед генерацией отчёта
+add_custom_command(
+    TARGET gcov_report
+    PRE_BUILD
+    COMMAND ./run_tests_coverage
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+)
