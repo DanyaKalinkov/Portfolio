@@ -1,4 +1,0 @@
-/mnt/c/Users/dkaal/Desktop/C/Programs/cpp_language/build/CMakeFiles/assistantcpp.dir
-/mnt/c/Users/dkaal/Desktop/C/Programs/cpp_language/build/CMakeFiles/run.dir
-/mnt/c/Users/dkaal/Desktop/C/Programs/cpp_language/build/CMakeFiles/edit_cache.dir
-/mnt/c/Users/dkaal/Desktop/C/Programs/cpp_language/build/CMakeFiles/rebuild_cache.dir
