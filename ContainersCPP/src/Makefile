@@ -13,4 +13,4 @@ rebuild: clean
 
 
 clean:
-	rm -f test/*.out
+	rm -f test/*.out   
